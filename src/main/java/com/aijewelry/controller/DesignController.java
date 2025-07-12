@@ -1,16 +1,19 @@
 package com.aijewelry.controller;
 
+import jakarta.ws.rs.Produces;
+
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.Base64;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Path("/designs")
@@ -39,5 +42,22 @@ public class DesignController {
         } catch (IOException e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Failed to save image").build();
         }
+    }
+
+    @GET
+    @Path("/list")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response listDesigns() {
+        File uploadsDir = new File("uploads");
+        if (!uploadsDir.exists() || !uploadsDir.isDirectory()) {
+            return Response.ok().entity(Collections.emptyList()).build();
+        }
+
+        List<String> fileNames = Arrays.stream(uploadsDir.listFiles((dir, name) -> name.endsWith(".png")))
+                .map(File::getName)
+                .collect(Collectors.toList());
+
+        return Response.ok(fileNames, MediaType.APPLICATION_JSON).build();
+
     }
 }

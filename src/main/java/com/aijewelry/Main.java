@@ -2,6 +2,7 @@ package com.aijewelry;
 
 import com.aijewelry.controller.DesignController;
 import com.aijewelry.util.CorsFilter;
+import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.grizzly.http.server.HttpHandler;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.http.server.StaticHttpHandler;
@@ -16,6 +17,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         final ResourceConfig config = new ResourceConfig()
                 .register(DesignController.class)
+                .register(JacksonFeature.class)
                 .register(CorsFilter.class);
 
         final HttpServer server = GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), config, false);
