@@ -1,3 +1,107 @@
+<!--<project xmlns="http://maven.apache.org/POM/4.0.0"-->
+<!--         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+<!--         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">-->
+<!--    <modelVersion>4.0.0</modelVersion>-->
+<!--    <groupId>com.aijewelry</groupId>-->
+<!--    <artifactId>ai-jewelry-backend</artifactId>-->
+<!--    <version>1.0-SNAPSHOT</version>-->
+
+<!--    <dependencies>-->
+<!--        &lt;!&ndash; JAX-RS API &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.glassfish.jersey.core</groupId>-->
+<!--            <artifactId>jersey-server</artifactId>-->
+<!--            <version>2.35</version>-->
+<!--        </dependency>-->
+
+<!--        &lt;!&ndash; Jersey support for JSON &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.glassfish.jersey.media</groupId>-->
+<!--            <artifactId>jersey-media-json-jackson</artifactId>-->
+<!--            <version>2.35</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.glassfish.jersey.inject</groupId>-->
+<!--            <artifactId>jersey-hk2</artifactId>-->
+<!--            <version>2.35</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>jakarta.ws.rs</groupId>-->
+<!--            <artifactId>jakarta.ws.rs-api</artifactId>-->
+<!--            <version>3.1.0</version> &lt;!&ndash; or latest stable &ndash;&gt;-->
+<!--            <scope>provided</scope>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.glassfish.jersey.containers</groupId>-->
+<!--            <artifactId>jersey-container-grizzly2-http</artifactId>-->
+<!--            <version>2.35</version>-->
+<!--        </dependency>-->
+
+<!--        &lt;!&ndash; Logging &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.slf4j</groupId>-->
+<!--            <artifactId>slf4j-simple</artifactId>-->
+<!--            <version>1.7.32</version>-->
+<!--        </dependency>-->
+
+<!--        &lt;!&ndash; JAX-RS (Jakarta RESTful Web Services API) &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>javax.ws.rs</groupId>-->
+<!--            <artifactId>javax.ws.rs-api</artifactId>-->
+<!--            <version>2.1.1</version>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash; HK2 for Dependency Injection &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.glassfish.hk2</groupId>-->
+<!--            <artifactId>hk2-api</artifactId>-->
+<!--            <version>2.6.1</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.glassfish.hk2</groupId>-->
+<!--            <artifactId>hk2-utils</artifactId>-->
+<!--            <version>2.6.1</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.glassfish.hk2</groupId>-->
+<!--            <artifactId>hk2-locator</artifactId>-->
+<!--            <version>2.6.1</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.glassfish.hk2.external</groupId>-->
+<!--            <artifactId>jakarta.inject</artifactId>-->
+<!--            <version>2.6.1</version>-->
+<!--        </dependency>-->
+
+
+
+<!--        <dependency>-->
+<!--            <groupId>com.google.firebase</groupId>-->
+<!--            <artifactId>firebase-admin</artifactId>-->
+<!--            <version>9.1.1</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.google.auth</groupId>-->
+<!--            <artifactId>google-auth-library-oauth2-http</artifactId>-->
+<!--            <version>1.21.0</version>-->
+<!--        </dependency>-->
+
+
+<!--    </dependencies>-->
+
+<!--    <build>-->
+<!--        <plugins>-->
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-compiler-plugin</artifactId>-->
+<!--                <version>3.8.1</version>-->
+<!--                <configuration>-->
+<!--                    <source>11</source>-->
+<!--                    <target>11</target>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+<!--    </build>-->
+<!--</project>-->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -5,6 +109,12 @@
     <groupId>com.aijewelry</groupId>
     <artifactId>ai-jewelry-backend</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
     <dependencies>
         <!-- JAX-RS API -->
@@ -28,7 +138,7 @@
         <dependency>
             <groupId>jakarta.ws.rs</groupId>
             <artifactId>jakarta.ws.rs-api</artifactId>
-            <version>3.1.0</version> <!-- or latest stable -->
+            <version>3.1.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -72,8 +182,6 @@
             <version>2.6.1</version>
         </dependency>
 
-
-
         <dependency>
             <groupId>com.google.firebase</groupId>
             <artifactId>firebase-admin</artifactId>
@@ -84,8 +192,6 @@
             <artifactId>google-auth-library-oauth2-http</artifactId>
             <version>1.21.0</version>
         </dependency>
-
-
     </dependencies>
 
     <build>
@@ -95,9 +201,46 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>11</source>
-                    <target>11</target>
+                    <source>17</source>
+                    <target>17</target>
                 </configuration>
+            </plugin>
+
+            <!-- Maven Shade Plugin to create fat JAR -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.4.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>com.aijewelry.Main</mainClass>
+                                </transformer>
+                                <!-- Handle Jersey service files -->
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>META-INF/services/javax.ws.rs.ext.Providers</resource>
+                                </transformer>
+                            </transformers>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

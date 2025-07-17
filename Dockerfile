@@ -13,5 +13,5 @@ WORKDIR /app
 # Copy only the built JAR from the builder stage
 COPY --from=builder /app/target/*.jar app.jar
 
-# Run your app
-CMD ["java", "-cp", "app.jar", "com.aijewelry.Main"]
+# Run your app using -jar (not -cp)
+CMD ["java", "-jar", "app.jar"]
