@@ -4,8 +4,6 @@ services:
     env: java
     branch: main
     plan: free
-    buildCommand: "./mvnw package"  # or just "mvn package" if no wrapper
+    buildCommand: "./mvnw package"  # or "mvn package" if no wrapper
     startCommand: "java -cp target/ai-jewelry-backend-1.0-SNAPSHOT.jar com.aijewelry.Main"
-    envVars:
-      - key: JAVA_VERSION
-        value: 17
+    autoDeploy: true
