@@ -12,7 +12,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 import java.net.URI;
 
 public class Main {
-    public static final String BASE_URI = "http://localhost:8080/api/";
+    public static final String BASE_URI = "http://0.0.0.0:8080/api/";
 
     public static void main(String[] args) throws Exception {
         final ResourceConfig config = new ResourceConfig()
@@ -28,7 +28,7 @@ public class Main {
 
         server.start();
         System.out.println("✅ Server running at " + BASE_URI);
-        System.out.println("📂 Serving images at http://localhost:8080/uploads/<filename>.png");
+        System.out.println("📂 Serving images at http://0.0.0.0:8080/uploads/<filename>.png");
         System.out.println("🔴 Press Ctrl+C to stop.");
         Thread.currentThread().join(); // keep server running
     }
