@@ -1,6 +1,7 @@
 com/aijewelry/util/FirebaseUtils.class
 com/aijewelry/dao/DesignDao.class
 com/aijewelry/service/DesignServiceImpl.class
+com/aijewelry/util/CorsFilter.class
 com/aijewelry/controller/DesignController.class
 com/aijewelry/service/DesignService.class
 com/aijewelry/model/Design.class
