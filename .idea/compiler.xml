@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="ai-jewelry-backend" target="11" />
+      <module name="ai-jewelry-backend" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>
