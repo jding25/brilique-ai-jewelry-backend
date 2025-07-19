@@ -1,10 +1,11 @@
 package com.aijewelry.service;
 
 import com.aijewelry.model.Design;
+import com.aijewelry.model.DesignUploadRequest;
 
 import java.util.List;
 
 public interface DesignService {
-    void saveDesign(String userId, Design design);
-    List<Design> getUserDesigns(String userId);
+    void saveDesign(DesignUploadRequest designUploadRequest) throws Exception;
+    List<Design> getUserDesigns(String userId) throws Exception;
 }
