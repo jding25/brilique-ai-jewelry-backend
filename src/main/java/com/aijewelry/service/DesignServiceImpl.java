@@ -23,7 +23,7 @@ public class DesignServiceImpl implements DesignService {
         design.setUserPrompt(request.userPrompt);
         design.setStyle(request.style);
         design.setType(request.type);
-        design.setEnhancedPrompt(request.enhancedPrompt);
+//        design.setEnhancedPrompt(request.enhancedPrompt);
         design.setImageUrl(imageUrl);
         design.setTimestamp(Instant.now());
 

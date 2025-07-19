@@ -13,21 +13,21 @@ public class Design {
     private String type;
     private String style;
     private String userPrompt;
-    private String enhancedPrompt;
+//    private String enhancedPrompt;
     private String imageUrl;
     private Instant timestamp;
 
     public Design() {}
 
     public Design(String userId, String designId, String userPrompt, String type, String style,
-                  String imageUrl, String enhancedPrompt, Instant timestamp) {
+                  String imageUrl, Instant timestamp) {
         this.userId = userId;
         this.designId = designId;
         this.userPrompt = userPrompt;
         this.type = type;
         this.style = style;
         this.imageUrl = imageUrl;
-        this.enhancedPrompt = enhancedPrompt;
+//        this.enhancedPrompt = enhancedPrompt;
         this.timestamp = timestamp;
     }
 
@@ -73,13 +73,13 @@ public class Design {
         this.style = style;
     }
 
-    public String getEnhancedPrompt() {
-        return enhancedPrompt;
-    }
-
-    public void setEnhancedPrompt(String enhancedPrompt) {
-        this.enhancedPrompt = enhancedPrompt;
-    }
+//    public String getEnhancedPrompt() {
+//        return enhancedPrompt;
+//    }
+//
+//    public void setEnhancedPrompt(String enhancedPrompt) {
+//        this.enhancedPrompt = enhancedPrompt;
+//    }
 
     public String getImageUrl() {
         return imageUrl;
