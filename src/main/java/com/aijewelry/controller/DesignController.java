@@ -1,5 +1,10 @@
 package com.aijewelry.controller;
 
+import com.aijewelry.model.Design;
+import com.aijewelry.model.DesignUploadRequest;
+import com.aijewelry.service.DesignService;
+import com.aijewelry.service.DesignServiceImpl;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 
 import javax.ws.rs.Consumes;
@@ -19,45 +24,34 @@ import java.util.stream.Collectors;
 @Path("/designs")
 public class DesignController {
 
+    private final DesignService service = new DesignServiceImpl();
+
     @POST
     @Path("/upload")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response uploadDesign(Map<String, String> payload) {
-        String base64 = payload.get("image");
-
-        if (base64 == null || base64.isEmpty()) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("No image provided").build();
-        }
-
+    public Response uploadDesign(DesignUploadRequest request) {
         try {
-            byte[] imageBytes = Base64.getDecoder().decode(base64.replaceFirst("^data:image/[^;]+;base64,", ""));
-            String fileName = UUID.randomUUID().toString() + ".png";
-            java.nio.file.Path outputPath = java.nio.file.Paths.get("uploads", fileName);
-
-
-            Files.createDirectories(outputPath.getParent());
-            Files.write(outputPath, imageBytes);
-
-            return Response.ok("uploads/" + fileName).build();
-        } catch (IOException e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Failed to save image").build();
+            service.saveDesign(request);
+            return Response.ok("Design saved successfully").build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Error: " + e.getMessage())
+                    .build();
         }
     }
 
     @GET
-    @Path("/list")
+    @Path("/user/{userId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response listDesigns() {
-        File uploadsDir = new File("uploads");
-        if (!uploadsDir.exists() || !uploadsDir.isDirectory()) {
-            return Response.ok().entity(Collections.emptyList()).build();
+    public Response getDesignsByUser(@PathParam("userId") String userId) {
+        try {
+            List<Design> designs = service.getUserDesigns(userId);
+            return Response.ok(designs).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Failed to fetch designs: " + e.getMessage())
+                    .build();
         }
-
-        List<String> fileNames = Arrays.stream(uploadsDir.listFiles((dir, name) -> name.endsWith(".png")))
-                .map(File::getName)
-                .collect(Collectors.toList());
-
-        return Response.ok(fileNames, MediaType.APPLICATION_JSON).build();
-
     }
+
 }

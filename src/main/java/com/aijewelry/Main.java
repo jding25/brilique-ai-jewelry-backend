@@ -22,9 +22,9 @@ public class Main {
 
         final HttpServer server = GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), config, false);
 
-        // Serve /uploads from local disk folder named "uploads"
-        StaticHttpHandler staticHandler = new StaticHttpHandler("uploads/");
-        server.getServerConfiguration().addHttpHandler(staticHandler, "/uploads");
+//        // Serve /uploads from local disk folder named "uploads"
+//        StaticHttpHandler staticHandler = new StaticHttpHandler("uploads/");
+//        server.getServerConfiguration().addHttpHandler(staticHandler, "/uploads");
 
         server.start();
         System.out.println("✅ Server running at " + BASE_URI);
