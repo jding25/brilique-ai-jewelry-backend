@@ -17,6 +17,7 @@ public class DesignServiceImpl implements DesignService {
     public String saveDesign(DesignUploadRequest request) throws Exception {
         // TODO: to improve efficiency, we can return imageUrl first before saving to designDao?
         String imageUrl = imageStorage.uploadImage(request.imageBase64);
+        System.out.println("imageUrl in DesignServiceImpl is "+imageUrl);
 
         Design design = new Design();
         design.setUserId(request.userId);

@@ -33,6 +33,7 @@ public class DesignController {
     public Response uploadDesign(DesignUploadRequest request) {
         try {
             String imageUrl = service.saveDesign(request);
+            System.out.println("imageUrl from DesignController, "+imageUrl);
             Map<String, String> responseBody = new HashMap<>();
             responseBody.put("imageUrl", imageUrl);
             return Response.ok(responseBody).build();

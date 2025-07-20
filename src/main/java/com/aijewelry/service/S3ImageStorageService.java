@@ -22,6 +22,7 @@ public class S3ImageStorageService {
     public String uploadImage(String base64) throws Exception {
         byte[] bytes = Base64.getDecoder().decode(base64.replaceFirst("^data:image/[^;]+;base64,", ""));
         String fileName = "uploads/" + UUID.randomUUID() + ".png";
+        System.out.println("fileName in S3ImageStorageService is " + fileName);
 
         PutObjectRequest putReq = PutObjectRequest.builder()
                 .bucket(BUCKET_NAME)
@@ -30,7 +31,8 @@ public class S3ImageStorageService {
 //                .acl(ObjectCannedACL.PUBLIC_READ)
                 .build();
 
-        s3.putObject(putReq, RequestBody.fromBytes(bytes));
+        String res = String.valueOf(s3.putObject(putReq, RequestBody.fromBytes(bytes)));
+        System.out.println("response of putting in S3 in S3ImageStorageService is " + res);
 
         return "https://" + BUCKET_NAME + ".s3." + REGION + ".amazonaws.com/" + fileName;
         }
