@@ -4,6 +4,7 @@ import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.ObjectCannedACL;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
 import java.util.Base64;
@@ -26,6 +27,7 @@ public class S3ImageStorageService {
                 .bucket(BUCKET_NAME)
                 .key(fileName)
                 .contentType("image/png")
+                .acl(ObjectCannedACL.PUBLIC_READ)
                 .build();
 
         s3.putObject(putReq, RequestBody.fromBytes(bytes));

@@ -37,6 +37,7 @@ public class DesignController {
             responseBody.put("imageUrl", imageUrl);
             return Response.ok(responseBody).build();
         } catch (Exception e) {
+            e.printStackTrace();
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
                     .entity("Error: " + e.getMessage())
                     .build();
