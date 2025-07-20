@@ -27,7 +27,7 @@ public class S3ImageStorageService {
                 .bucket(BUCKET_NAME)
                 .key(fileName)
                 .contentType("image/png")
-                .acl(ObjectCannedACL.PUBLIC_READ)
+//                .acl(ObjectCannedACL.PUBLIC_READ)
                 .build();
 
         s3.putObject(putReq, RequestBody.fromBytes(bytes));
