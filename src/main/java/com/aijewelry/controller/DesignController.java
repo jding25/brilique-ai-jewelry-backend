@@ -29,10 +29,13 @@ public class DesignController {
     @POST
     @Path("/upload")
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response uploadDesign(DesignUploadRequest request) {
         try {
-            service.saveDesign(request);
-            return Response.ok("Design saved successfully").build();
+            String imageUrl = service.saveDesign(request);
+            Map<String, String> responseBody = new HashMap<>();
+            responseBody.put("imageUrl", imageUrl);
+            return Response.ok(responseBody).build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
                     .entity("Error: " + e.getMessage())

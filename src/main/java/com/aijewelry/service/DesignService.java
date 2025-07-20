@@ -6,6 +6,6 @@ import com.aijewelry.model.DesignUploadRequest;
 import java.util.List;
 
 public interface DesignService {
-    void saveDesign(DesignUploadRequest designUploadRequest) throws Exception;
+    String saveDesign(DesignUploadRequest designUploadRequest) throws Exception;
     List<Design> getUserDesigns(String userId) throws Exception;
 }

@@ -25,7 +25,6 @@ public class S3ImageStorageService {
         PutObjectRequest putReq = PutObjectRequest.builder()
                 .bucket(BUCKET_NAME)
                 .key(fileName)
-                .acl("public-read")
                 .contentType("image/png")
                 .build();
 
