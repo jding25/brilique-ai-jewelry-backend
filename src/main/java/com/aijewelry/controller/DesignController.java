@@ -36,11 +36,12 @@ public class DesignController {
             System.out.println("imageUrl from DesignController, "+imageUrl);
             Map<String, String> responseBody = new HashMap<>();
             responseBody.put("imageUrl", imageUrl);
-            return Response.ok(responseBody).build();
+            return Response.ok(responseBody, MediaType.APPLICATION_JSON).build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-                    .entity("Error: " + e.getMessage())
+                    .entity(Collections.singletonMap("error", e.getMessage()))
+                    .type(MediaType.APPLICATION_JSON)
                     .build();
         }
     }
