@@ -51,6 +51,7 @@ public class DesignController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getDesignsByUser(@PathParam("userId") String userId) {
         try {
+            System.out.println("Received userId in controller: " + userId);
             List<Design> designs = service.getUserDesigns(userId);
             return Response.ok(designs).build();
         } catch (Exception e) {
