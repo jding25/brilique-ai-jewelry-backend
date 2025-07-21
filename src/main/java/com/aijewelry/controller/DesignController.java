@@ -48,11 +48,11 @@ public class DesignController {
     }
 
     @GET
-    @Path("/user")
+    @Path("/user/{userId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getDesignsByUser(@QueryParam("userId") String userId) {
+    public Response getDesignsByUser(@PathParam("userId") String userId) {
         try {
-            System.out.println("Received userId in controller: " + userId);
+            System.out.println("Received userId in controller: '" + userId + "'");
 
             if (userId == null || userId.trim().isEmpty()) {
                 return Response.status(Response.Status.BAD_REQUEST)
@@ -70,6 +70,4 @@ public class DesignController {
                     .build();
         }
     }
-
-
 }
