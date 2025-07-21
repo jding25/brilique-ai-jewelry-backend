@@ -63,7 +63,7 @@ public class DesignController {
             }
 
             List<Design> designs = service.getUserDesigns(userId);
-            return Response.ok(designs).build();
+            return Response.ok(designs).type(MediaType.APPLICATION_JSON).build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
                     .entity(Collections.singletonMap("error", "Failed to fetch designs: " + e.getMessage()))
