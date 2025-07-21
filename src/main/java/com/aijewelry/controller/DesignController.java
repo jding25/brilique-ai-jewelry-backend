@@ -6,12 +6,8 @@ import com.aijewelry.service.DesignService;
 import com.aijewelry.service.DesignServiceImpl;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.QueryParam;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -52,9 +48,9 @@ public class DesignController {
     private javax.ws.rs.core.UriInfo uriInfo;
 
     @GET
-    @Path("/user/{userId}")
+    @Path("/user")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getDesignsByUser(@PathParam("userId") String userId) {
+    public Response getDesignsByUser(@QueryParam("userId") String userId) {
         try {
             System.out.println("Full request URI: " + uriInfo.getRequestUri());
             System.out.println("Received userId in controller: '" + userId + "'");
