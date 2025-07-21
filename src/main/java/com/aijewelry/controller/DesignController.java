@@ -53,13 +53,23 @@ public class DesignController {
     public Response getDesignsByUser(@QueryParam("userId") String userId) {
         try {
             System.out.println("Received userId in controller: " + userId);
+
+            if (userId == null || userId.trim().isEmpty()) {
+                return Response.status(Response.Status.BAD_REQUEST)
+                        .entity(Collections.singletonMap("error", "Missing or empty userId"))
+                        .type(MediaType.APPLICATION_JSON)
+                        .build();
+            }
+
             List<Design> designs = service.getUserDesigns(userId);
             return Response.ok(designs).build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-                    .entity("Failed to fetch designs: " + e.getMessage())
+                    .entity(Collections.singletonMap("error", "Failed to fetch designs: " + e.getMessage()))
+                    .type(MediaType.APPLICATION_JSON)
                     .build();
         }
     }
+
 
 }
