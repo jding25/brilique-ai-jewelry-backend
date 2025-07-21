@@ -6,6 +6,7 @@ import com.aijewelry.service.DesignService;
 import com.aijewelry.service.DesignServiceImpl;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -47,9 +48,9 @@ public class DesignController {
     }
 
     @GET
-    @Path("/user/{userId}")
+    @Path("/user")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getDesignsByUser(@PathParam("userId") String userId) {
+    public Response getDesignsByUser(@QueryParam("userId") String userId) {
         try {
             System.out.println("Received userId in controller: " + userId);
             List<Design> designs = service.getUserDesigns(userId);
