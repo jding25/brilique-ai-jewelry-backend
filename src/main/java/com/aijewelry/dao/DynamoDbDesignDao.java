@@ -36,14 +36,18 @@ public class DynamoDbDesignDao implements DesignDao{
 
     @Override
     public List<Design> getDesignsByUser(String userId) throws Exception {
-        QueryConditional query = QueryConditional
-                .keyEqualTo(Key.builder().partitionValue(userId).build());
+        try {
+            QueryConditional query = QueryConditional
+                    .keyEqualTo(Key.builder().partitionValue(userId).build());
 
-        List<Design> results = new ArrayList<>();
+            List<Design> results = new ArrayList<>();
 
-        designTable.query(query).items().forEach(results::add);
-        return results;
+            designTable.query(query).items().forEach(results::add);
+            System.out.println(results);
+            return results;
+        } catch (Exception e) {
+            System.out.println(e);
+            throw e;
+        }
     }
-
-
 }
