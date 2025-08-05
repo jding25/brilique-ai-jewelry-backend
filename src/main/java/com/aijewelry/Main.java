@@ -28,11 +28,6 @@ public class Main {
                 .register(CorsFilter.class);
 
         final HttpServer server = GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), config, false);
-
-//        // Serve /uploads from local disk folder named "uploads"
-//        StaticHttpHandler staticHandler = new StaticHttpHandler("uploads/");
-//        server.getServerConfiguration().addHttpHandler(staticHandler, "/uploads");
-
         server.start();
         System.out.println("✅ Server running at " + BASE_URI);
         System.out.println("📂 Serving images at http://0.0.0.0:8080/uploads/<filename>.png");

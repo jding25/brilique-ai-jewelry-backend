@@ -5,6 +5,7 @@ import java.time.Instant;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbSortKey;
+import software.amazon.awssdk.services.s3.endpoints.internal.Value;
 
 @DynamoDbBean
 public class Design {
@@ -16,11 +17,13 @@ public class Design {
     private String enhancedPrompt;
     private String imageUrl;
     private Instant timestamp;
+    private Boolean addToMarket;
+    private Integer numLikes;
 
     public Design() {}
 
     public Design(String userId, String designId, String userPrompt, String type, String style,
-                  String imageUrl, String enhancedPrompt, Instant timestamp) {
+                  String imageUrl, String enhancedPrompt, Instant timestamp, Boolean addToMarket, Integer numLikes) {
         this.userId = userId;
         this.designId = designId;
         this.userPrompt = userPrompt;
@@ -29,6 +32,8 @@ public class Design {
         this.imageUrl = imageUrl;
         this.enhancedPrompt = enhancedPrompt;
         this.timestamp = timestamp;
+        this.addToMarket = addToMarket;
+        this.numLikes = numLikes;
     }
 
     @DynamoDbPartitionKey
@@ -95,5 +100,17 @@ public class Design {
 
     public void setTimestamp(Instant timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public void setAddToMarket(Boolean addToMarket) { this.addToMarket = addToMarket; }
+
+    public Boolean getAddToMarket() {
+        return addToMarket;
+    }
+
+    public void setNumLikes(Integer numLikes) {this.numLikes = numLikes; }
+
+    public Integer getNumLikes() {
+        return numLikes;
     }
 }
