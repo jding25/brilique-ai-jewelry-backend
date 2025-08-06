@@ -12,6 +12,7 @@ import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DynamoDbDesignDao implements DesignDao{
     private final DynamoDbEnhancedClient enhancedClient;
@@ -49,5 +50,10 @@ public class DynamoDbDesignDao implements DesignDao{
             System.out.println(e);
             throw e;
         }
+    }
+
+    @Override
+    public java.util.List<Design> getMarketDesigns() {
+        return designTable.scan().items().stream().filter(Design::isAddToMarket).collect(Collectors.toList());
     }
 }

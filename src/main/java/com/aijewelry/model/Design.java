@@ -104,7 +104,7 @@ public class Design {
 
     public void setAddToMarket(Boolean addToMarket) { this.addToMarket = addToMarket; }
 
-    public Boolean getAddToMarket() {
+    public Boolean isAddToMarket() {
         return addToMarket;
     }
 

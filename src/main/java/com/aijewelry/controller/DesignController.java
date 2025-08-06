@@ -66,4 +66,18 @@ public class DesignController {
                     .build();
         }
     }
+
+    @GET
+    @Path("/market")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getMarketDesigns() {
+        try {
+            List<Design> marketDesigns = service.getMarketDesigns();
+            return Response.ok(marketDesigns).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity(Collections.singletonMap("error", "Cannot retrieve market designs")).build();
+        }
+    }
 }

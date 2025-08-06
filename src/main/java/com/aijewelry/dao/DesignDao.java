@@ -7,4 +7,5 @@ import java.util.List;
 public interface DesignDao {
     void saveDesign(Design design);
     List<Design> getDesignsByUser(String userId) throws Exception;
+    List<Design> getMarketDesigns();
 }
