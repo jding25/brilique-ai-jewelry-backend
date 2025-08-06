@@ -77,6 +77,7 @@ public class DesignController {
         } catch (Exception e) {
             e.printStackTrace();
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .type(MediaType.APPLICATION_JSON)
                     .entity(Collections.singletonMap("error", "Cannot retrieve market designs")).build();
         }
     }

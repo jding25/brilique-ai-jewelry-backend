@@ -54,6 +54,6 @@ public class DynamoDbDesignDao implements DesignDao{
 
     @Override
     public java.util.List<Design> getMarketDesigns() {
-        return designTable.scan().items().stream().filter(Design::isAddToMarket).collect(Collectors.toList());
+        return designTable.scan().items().stream().filter(design -> Boolean.TRUE.equals(design.isAddToMarket())).collect(Collectors.toList());
     }
 }
