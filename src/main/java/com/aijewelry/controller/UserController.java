@@ -19,11 +19,13 @@ public class UserController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response uploadUser(UserUploadRequest request) {
         try {
-            service.saveUser(request);  // delegates to UserServiceImpl
-            return Response.status(Response.Status.CREATED).entity("User saved").build();
+            service.saveUser(request);
+            return Response.status(Response.Status.CREATED).entity("{\"message\":\"User saved\"}")
+                    .type(MediaType.APPLICATION_JSON).build();
         } catch (Exception e) {
             e.printStackTrace();
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Failed to save user").build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("{\"message\":\"Failed to save user\"}").build();
         }
     }
 
