@@ -1,6 +1,7 @@
 package com.aijewelry;
 
 import com.aijewelry.controller.DesignController;
+import com.aijewelry.controller.UserController;
 import com.aijewelry.util.CorsFilter;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.grizzly.http.server.HttpHandler;
@@ -24,6 +25,7 @@ public class Main {
         provider.setMapper(mapper);
         final ResourceConfig config = new ResourceConfig()
                 .register(DesignController.class)
+                .register(UserController.class)
                 .register(provider)
                 .register(CorsFilter.class);
 
