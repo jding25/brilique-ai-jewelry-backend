@@ -73,7 +73,7 @@ public class DesignController {
     public Response getMarketDesigns() {
         try {
             List<Design> marketDesigns = service.getMarketDesigns();
-            return Response.ok(marketDesigns).build();
+            return Response.ok(marketDesigns, MediaType.APPLICATION_JSON).build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
