@@ -4,7 +4,6 @@ import com.aijewelry.model.Design;
 import com.aijewelry.model.DesignUploadRequest;
 import com.aijewelry.service.DesignService;
 import com.aijewelry.service.DesignServiceImpl;
-import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 
 import javax.ws.rs.*;
@@ -12,11 +11,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.*;
-import java.util.stream.Collectors;
 
 
 @Path("/designs")
