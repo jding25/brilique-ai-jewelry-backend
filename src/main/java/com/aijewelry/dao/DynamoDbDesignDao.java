@@ -55,7 +55,7 @@ public class DynamoDbDesignDao implements DesignDao{
 
     @Override
     public java.util.List<Design> getMarketDesigns() {
-        int pageLimit = 10;
+        int pageLimit = 50;
 
         // Server‑side filter (still a scan, but DynamoDB drops non-matching items early)
         Expression onlyMarket = Expression.builder()
