@@ -2,13 +2,14 @@ package com.aijewelry.dao;
 
 import com.aijewelry.model.Design;
 import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
-import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
-import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable;
-import software.amazon.awssdk.enhanced.dynamodb.Key;
-import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
+import software.amazon.awssdk.enhanced.dynamodb.*;
+import software.amazon.awssdk.enhanced.dynamodb.model.Page;
+import software.amazon.awssdk.enhanced.dynamodb.model.PageIterable;
 import software.amazon.awssdk.enhanced.dynamodb.model.QueryConditional;
+import software.amazon.awssdk.enhanced.dynamodb.model.ScanEnhancedRequest;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
+import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +55,25 @@ public class DynamoDbDesignDao implements DesignDao{
 
     @Override
     public java.util.List<Design> getMarketDesigns() {
-        return designTable.scan().items().stream().filter(Design::isAddToMarket).collect(Collectors.toList());
+        int pageLimit = 10;
+
+        // Server‑side filter (still a scan, but DynamoDB drops non-matching items early)
+        Expression onlyMarket = Expression.builder()
+                .expression("addToMarket = :t")
+                .putExpressionValue(":t", AttributeValue.builder().bool(true).build())
+                .build();
+
+        ScanEnhancedRequest req = ScanEnhancedRequest.builder()
+                .limit(pageLimit)            // first page only
+                .filterExpression(onlyMarket)
+                .build();
+
+        PageIterable<Design> pages = designTable.scan(req);
+        return pages.stream()
+                .findFirst()
+                .map(Page::items)
+                .map(ArrayList::new)
+                .orElseGet(ArrayList::new);
+//        return designTable.scan().items().stream().filter(design -> Boolean.TRUE.equals(design.isAddToMarket())).collect(Collectors.toList());
     }
 }
