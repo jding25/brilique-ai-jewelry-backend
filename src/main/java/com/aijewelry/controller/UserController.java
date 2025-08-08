@@ -48,7 +48,7 @@ public class UserController {
     }
 
     @GET
-    @Path("/retrieve all")
+    @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
     public Response retrieveAllUsers() {
         try{
