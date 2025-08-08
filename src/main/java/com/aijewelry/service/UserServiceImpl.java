@@ -8,6 +8,7 @@ import com.aijewelry.model.User;
 import com.aijewelry.model.UserUploadRequest;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.UUID;
 
 public class UserServiceImpl implements UserService{
@@ -28,4 +29,7 @@ public class UserServiceImpl implements UserService{
     public User getUser(String email) {
         return userDao.getUser(email);
     }
+
+    @Override
+    public List<User> retrieveAllUsers() {return userDao.retrieveAllUsers();};
 }

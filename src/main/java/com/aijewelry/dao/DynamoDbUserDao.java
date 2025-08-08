@@ -8,6 +8,9 @@ import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DynamoDbUserDao implements UserDao {
     private final DynamoDbEnhancedClient enhancedClient;
     private final DynamoDbTable<User> userTable;
@@ -34,5 +37,12 @@ public class DynamoDbUserDao implements UserDao {
     @Override
     public User getUser(String email) {
         return userTable.getItem(r -> r.key(k -> k.partitionValue(email)));
+    }
+
+    @Override
+    public List<User> retrieveAllUsers() {
+        List<User> out = new ArrayList<>();
+        userTable.scan().items().forEach(out::add);
+        return out;
     }
 }
