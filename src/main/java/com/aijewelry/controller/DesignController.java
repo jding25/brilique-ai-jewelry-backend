@@ -2,6 +2,7 @@ package com.aijewelry.controller;
 
 import com.aijewelry.model.Design;
 import com.aijewelry.model.DesignUploadRequest;
+import com.aijewelry.model.ModifyMarketRequest;
 import com.aijewelry.service.DesignService;
 import com.aijewelry.service.DesignServiceImpl;
 import jakarta.ws.rs.Produces;
@@ -85,23 +86,18 @@ public class DesignController {
     @PUT
     @Path("/setAddToMarket")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response setAddToMarket(@QueryParam("userId") String userId, @QueryParam("designId") String designId,
-                                   @QueryParam("addToMarket") Boolean addToMarket) {
+    public Response setAddToMarket(ModifyMarketRequest req) {
         try {
-            if (userId == null || designId == null) {
-                return Response.status(400).type(MediaType.APPLICATION_JSON)
-                        .entity("{\"message\":\"userId and designId are required\"}").build();
+            if (req == null || req.getUserId() == null || req.getDesignId() == null) {
+                return Response.status(400).entity("{\"message\":\"userId and designId are required\"}").build();
             }
-
-            service.setAddToMarket(userId, designId, addToMarket);
+            service.setAddToMarket(req.getUserId(), req.getDesignId(), req.getAddToMarket());
             return Response.ok("{\"message\":\"updated\"}", MediaType.APPLICATION_JSON).build();
         } catch (IllegalArgumentException notFound) {
             return Response.status(404).type(MediaType.APPLICATION_JSON)
                     .entity("{\"message\":\"Design not found\"}").build();
         } catch (Exception e) {
             e.printStackTrace();
-//            return Response.status(500).type(MediaType.APPLICATION_JSON)
-//                    .entity("{\"message\":\"Failed to update addToMarket\"}").build();
             String msg = e.getClass().getSimpleName() + ": " + String.valueOf(e.getMessage());
             return Response.status(500).type(MediaType.APPLICATION_JSON)
                     .entity("{\"message\":\"Failed to update addToMarket\",\"error\":\"" + msg.replace("\"","'") + "\"}")
