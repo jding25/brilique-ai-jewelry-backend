@@ -86,8 +86,16 @@ public class DynamoDbDesignDao implements DesignDao{
                 throw new IllegalArgumentException("Design not found for userId=" + userId + " and designId=" + designId);
             }
 
+            System.out.println("Before update - addToMarket: " + design.getAddToMarket());
             design.setAddToMarket(addToMarket);
-            designTable.updateItem(design); // This saves the updated object
+            System.out.println("After setting - addToMarket: " + design.getAddToMarket());
+
+            // Use putItem instead of updateItem to ensure the change persists
+            designTable.putItem(design);
+
+            // Verify the update by reading it back
+            Design updatedDesign = designTable.getItem(key);
+            System.out.println("After update - addToMarket: " + updatedDesign.getAddToMarket());
         } catch (Exception e) {
             System.err.println("Failed to update addToMarket: " + e.getMessage());
             throw e;

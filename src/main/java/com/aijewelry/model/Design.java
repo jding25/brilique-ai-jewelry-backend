@@ -2,6 +2,7 @@ package com.aijewelry.model;
 
 import java.time.Instant;
 
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbAttribute;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbSortKey;
@@ -103,8 +104,8 @@ public class Design {
     }
 
     public void setAddToMarket(Boolean addToMarket) { this.addToMarket = addToMarket; }
-
-    public Boolean isAddToMarket() {
+    @DynamoDbAttribute("addToMarket")
+    public Boolean getAddToMarket() {
         return addToMarket;
     }
 
