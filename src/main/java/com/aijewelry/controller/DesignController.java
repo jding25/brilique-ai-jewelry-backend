@@ -88,12 +88,25 @@ public class DesignController {
     public Response setAddToMarket(@QueryParam("userId") String userId, @QueryParam("designId") String designId,
                                    @QueryParam("addToMarket") Boolean addToMarket) {
         try {
+            if (userId == null || designId == null) {
+                return Response.status(400).type(MediaType.APPLICATION_JSON)
+                        .entity("{\"message\":\"userId and designId are required\"}").build();
+            }
+
             service.setAddToMarket(userId, designId, addToMarket);
             return Response.ok("{\"message\":\"updated\"}", MediaType.APPLICATION_JSON).build();
+        } catch (IllegalArgumentException notFound) {
+            return Response.status(404).type(MediaType.APPLICATION_JSON)
+                    .entity("{\"message\":\"Design not found\"}").build();
         } catch (Exception e) {
             e.printStackTrace();
+//            return Response.status(500).type(MediaType.APPLICATION_JSON)
+//                    .entity("{\"message\":\"Failed to update addToMarket\"}").build();
+            String msg = e.getClass().getSimpleName() + ": " + String.valueOf(e.getMessage());
             return Response.status(500).type(MediaType.APPLICATION_JSON)
-                    .entity("{\"message\":\"Failed to update addToMarket\"}").build();
+                    .entity("{\"message\":\"Failed to update addToMarket\",\"error\":\"" + msg.replace("\"","'") + "\"}")
+                    .build();
+
         }
     }
 }
