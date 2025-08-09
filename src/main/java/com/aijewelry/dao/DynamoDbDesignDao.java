@@ -90,8 +90,7 @@ public class DynamoDbDesignDao implements DesignDao{
             design.setAddToMarket(addToMarket);
             System.out.println("After setting - addToMarket: " + design.getAddToMarket());
 
-            // Use putItem instead of updateItem to ensure the change persists
-            designTable.putItem(design);
+            designTable.updateItem(design);
 
             // Verify the update by reading it back
             Design updatedDesign = designTable.getItem(key);
