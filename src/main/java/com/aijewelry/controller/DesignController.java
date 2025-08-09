@@ -81,4 +81,19 @@ public class DesignController {
                     .entity(Collections.singletonMap("error", "Cannot retrieve market designs")).build();
         }
     }
+
+    @PUT
+    @Path("/setAddToMarket")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response setAddToMarket(@QueryParam("userId") String userId, @QueryParam("designId") String designId,
+                                   @QueryParam("addToMarket") Boolean addToMarket) {
+        try {
+            service.setAddToMarket(userId, designId, addToMarket);
+            return Response.ok("{\"message\":\"updated\"}", MediaType.APPLICATION_JSON).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.status(500).type(MediaType.APPLICATION_JSON)
+                    .entity("{\"message\":\"Failed to update addToMarket\"}").build();
+        }
+    }
 }

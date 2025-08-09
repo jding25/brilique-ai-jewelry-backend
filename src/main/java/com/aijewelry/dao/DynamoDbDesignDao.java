@@ -3,17 +3,13 @@ package com.aijewelry.dao;
 import com.aijewelry.model.Design;
 import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
 import software.amazon.awssdk.enhanced.dynamodb.*;
-import software.amazon.awssdk.enhanced.dynamodb.model.Page;
-import software.amazon.awssdk.enhanced.dynamodb.model.PageIterable;
-import software.amazon.awssdk.enhanced.dynamodb.model.QueryConditional;
-import software.amazon.awssdk.enhanced.dynamodb.model.ScanEnhancedRequest;
+import software.amazon.awssdk.enhanced.dynamodb.model.*;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class DynamoDbDesignDao implements DesignDao{
     private final DynamoDbEnhancedClient enhancedClient;
@@ -75,5 +71,27 @@ public class DynamoDbDesignDao implements DesignDao{
                 .map(ArrayList::new)
                 .orElseGet(ArrayList::new);
 //        return designTable.scan().items().stream().filter(design -> Boolean.TRUE.equals(design.isAddToMarket())).collect(Collectors.toList());
+    }
+
+    @Override
+    public void setAddToMarket(String userId, String designId, Boolean addToMarket) throws Exception{
+        try {
+            Key key = Key.builder()
+                    .partitionValue(userId)
+                    .sortValue(designId)
+                    .build();
+
+            Design design = designTable.getItem(key);
+            if (design == null) {
+                throw new IllegalArgumentException("Design not found for userId=" + userId + " and designId=" + designId);
+            }
+
+            design.setAddToMarket(addToMarket);
+            designTable.updateItem(design); // This saves the updated object
+        } catch (Exception e) {
+            System.err.println("Failed to update addToMarket: " + e.getMessage());
+            throw e;
+        }
+
     }
 }
