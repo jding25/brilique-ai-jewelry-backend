@@ -74,6 +74,28 @@ public class DesignController {
     }
 
     @GET
+    @Path("/designsOnMarket")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getOnMarketDesignsByUser(@QueryParam("userId") String userId) {
+        try{
+            System.out.println("Received userId in controller: '" + userId + "'");
+            if (userId == null || userId.trim().isEmpty()) {
+                return Response.status(Response.Status.BAD_REQUEST)
+                        .entity(Collections.singletonMap("error", "Missing or empty userId"))
+                        .type(MediaType.APPLICATION_JSON)
+                        .build();
+            }
+            List<Design> designs = service.getOnMarketDesignByUser(userId);
+            return Response.ok(designs).type(MediaType.APPLICATION_JSON).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity(Collections.singletonMap("error", "Failed to fetch designs: " + e.getMessage()))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
+    }
+
+    @GET
     @Path("/market")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getMarketDesigns() {

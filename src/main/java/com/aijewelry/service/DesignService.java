@@ -10,5 +10,6 @@ public interface DesignService {
     List<Design> getUserDesigns(String userId) throws Exception;
     List<Design> getMarketDesigns() throws Exception;
     void setAddToMarket(String userId, String designId, Boolean addToMarket) throws Exception;
+    List<Design> getOnMarketDesignByUser(String userId) throws Exception;
 
 }

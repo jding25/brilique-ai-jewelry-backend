@@ -9,4 +9,5 @@ public interface DesignDao {
     List<Design> getDesignsByUser(String userId) throws Exception;
     List<Design> getMarketDesigns();
     void setAddToMarket(String userId, String designId, Boolean addToMarket) throws Exception;
+    List<Design> getOnMarketDesignByUser(String userId) throws Exception;
 }

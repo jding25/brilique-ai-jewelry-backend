@@ -101,4 +101,36 @@ public class DynamoDbDesignDao implements DesignDao{
         }
 
     }
+
+    @Override
+    public List<Design> getOnMarketDesignByUser(String userId) throws Exception {
+        try {
+            // Create the query condition for the partition key (userId)
+            QueryConditional query = QueryConditional
+                    .keyEqualTo(Key.builder().partitionValue(userId).build());
+
+            // Server-side filter to only get designs where addToMarket = true
+            Expression onlyMarket = Expression.builder()
+                    .expression("addToMarket = :t")
+                    .putExpressionValue(":t", AttributeValue.builder().bool(true).build())
+                    .build();
+
+            List<Design> results = new ArrayList<>();
+
+            // Execute the query with filter expression
+            designTable.query(QueryEnhancedRequest.builder()
+                            .queryConditional(query)
+                            .filterExpression(onlyMarket)
+                            .build())
+                    .items()
+                    .forEach(results::add);
+
+            System.out.println("Found " + results.size() + " designs on market for user: " + userId);
+            return results;
+
+        } catch (Exception e) {
+            System.out.println(e);
+            throw e;
+        }
+    }
 }
