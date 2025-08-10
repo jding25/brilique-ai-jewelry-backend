@@ -14,7 +14,7 @@ public class DesignServiceImpl implements DesignService {
     private final DynamoDbDesignDao designDao = new DynamoDbDesignDao();
 
     @Override
-    public String saveDesign(DesignUploadRequest request) throws Exception {
+    public Design saveDesign(DesignUploadRequest request) throws Exception {
         // TODO: to improve efficiency, we can return imageUrl first before saving to designDao?
         String imageUrl = imageStorage.uploadImage(request.imageBase64);
         System.out.println("imageUrl in DesignServiceImpl is "+imageUrl);
@@ -32,7 +32,7 @@ public class DesignServiceImpl implements DesignService {
         design.setNumLikes(0);
 
         designDao.saveDesign(design);
-        return imageUrl;
+        return design;
     }
 
     @Override

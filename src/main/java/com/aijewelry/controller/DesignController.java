@@ -26,10 +26,15 @@ public class DesignController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response uploadDesign(DesignUploadRequest request) {
         try {
-            String imageUrl = service.saveDesign(request);
+            Design design = service.saveDesign(request);
+            String imageUrl = design.getImageUrl();
+            String designId = design.getDesignId();
+            String userId = design.getUserId();
             System.out.println("imageUrl from DesignController, "+imageUrl);
             Map<String, String> responseBody = new HashMap<>();
             responseBody.put("imageUrl", imageUrl);
+            responseBody.put("designId", designId);
+            responseBody.put("userId", userId);
             return Response.ok(responseBody, MediaType.APPLICATION_JSON).build();
         } catch (Exception e) {
             e.printStackTrace();
