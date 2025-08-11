@@ -136,14 +136,12 @@ public class DesignController {
     }
 
     @GET
-    @Path("/get")
+    @Path("/get/{userId}/{designId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getDesign(GetDesignRequest req){
+    public Response getDesign(@PathParam("userId") String userId,
+                              @PathParam("designId") String designId){
         try{
-            if (req == null || req.getUserId() == null || req.getDesignId() == null) {
-                return Response.status(400).entity("{\"message\":\"userId and designId are required\"}").build();
-            }
-            service.getDesign(req.getUserId(), req.getDesignId());
+            service.getDesign(userId, designId);
             return Response.ok("{\"message\":\"design returned\"}", MediaType.APPLICATION_JSON).build();
         } catch (IllegalArgumentException notFound) {
             return Response.status(404).type(MediaType.APPLICATION_JSON)
