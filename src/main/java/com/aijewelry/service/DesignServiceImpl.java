@@ -54,4 +54,9 @@ public class DesignServiceImpl implements DesignService {
     public List<Design> getOnMarketDesignByUser(String userId) throws Exception {
         return designDao.getOnMarketDesignByUser(userId);
     }
+
+    @Override
+    public Design getDesign(String userId, String designId) throws Exception {
+        return designDao.getDesign(userId, designId);
+    }
 }

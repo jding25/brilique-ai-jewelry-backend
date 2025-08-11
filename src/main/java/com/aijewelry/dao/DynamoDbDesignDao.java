@@ -133,4 +133,24 @@ public class DynamoDbDesignDao implements DesignDao{
             throw e;
         }
     }
+
+    @Override
+    public Design getDesign(String userId, String designId) throws Exception{
+        try {
+            Key key = Key.builder()
+                    .partitionValue(userId)
+                    .sortValue(designId)
+                    .build();
+
+            Design design = designTable.getItem(key);
+            if (design == null) {
+                throw new IllegalArgumentException("Design not found for userId=" + userId + " and designId=" + designId);
+            }
+
+            return design;
+        } catch (Exception e) {
+            System.err.println("Failed to update addToMarket: " + e.getMessage());
+            throw e;
+        }
+    }
 }
