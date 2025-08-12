@@ -146,7 +146,6 @@ public class DynamoDbDesignDao implements DesignDao{
             if (design == null) {
                 throw new IllegalArgumentException("Design not found for userId=" + userId + " and designId=" + designId);
             }
-
             return design;
         } catch (Exception e) {
             System.err.println("Failed to update addToMarket: " + e.getMessage());

@@ -2,13 +2,11 @@ package com.aijewelry.controller;
 
 import com.aijewelry.model.Design;
 import com.aijewelry.model.DesignUploadRequest;
-import com.aijewelry.model.GetDesignRequest;
 import com.aijewelry.model.ModifyMarketRequest;
 import com.aijewelry.service.DesignService;
 import com.aijewelry.service.DesignServiceImpl;
 import jakarta.ws.rs.Produces;
 
-import javax.print.attribute.standard.Media;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -141,8 +139,8 @@ public class DesignController {
     public Response getDesign(@PathParam("userId") String userId,
                               @PathParam("designId") String designId){
         try{
-            service.getDesign(userId, designId);
-            return Response.ok("{\"message\":\"design returned\"}", MediaType.APPLICATION_JSON).build();
+            Design design = service.getDesign(userId, designId);
+            return Response.ok(design, MediaType.APPLICATION_JSON).build();
         } catch (IllegalArgumentException notFound) {
             return Response.status(404).type(MediaType.APPLICATION_JSON)
                     .entity("{\"message\":\"Design not found\"}").build();
