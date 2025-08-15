@@ -32,6 +32,7 @@ public class DesignServiceImpl implements DesignService {
         design.setMaterial(request.material);
         design.setPrice(request.price);
         design.setNumLikes(0);
+        design.setDescription(request.description);
 
         designDao.saveDesign(design);
         return design;

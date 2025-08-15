@@ -21,12 +21,13 @@ public class Design {
     private Integer numLikes;
     private Integer price;
     private String material;
+    private String description;
 
     public Design() {}
 
     public Design(String userId, String designId, String userPrompt, String type, String style,
                   String imageUrl, String enhancedPrompt, Instant timestamp, Boolean addToMarket, Integer numLikes,
-                  Integer price, String material) {
+                  Integer price, String material, String description) {
         this.userId = userId;
         this.designId = designId;
         this.userPrompt = userPrompt;
@@ -39,6 +40,7 @@ public class Design {
         this.numLikes = numLikes;
         this.price = price;
         this.material = material;
+        this.description = description;
     }
 
     @DynamoDbPartitionKey
@@ -125,5 +127,9 @@ public class Design {
 
     public void setMaterial(String material) {this.material = material;}
 
-    public  String getMaterial(){return this.material;}
+    public String getMaterial(){return this.material;}
+
+    public void setDescription(String description) {this.description = description;}
+
+    public String getDescription(){return this.description;}
 }

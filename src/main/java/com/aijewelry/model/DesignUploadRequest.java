@@ -9,4 +9,5 @@ public class DesignUploadRequest {
     public String imageBase64;
     public Integer price;
     public String material;
+    public String description;
 }
