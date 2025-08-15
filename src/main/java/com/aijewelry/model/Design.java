@@ -6,7 +6,6 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbAttri
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbSortKey;
-import software.amazon.awssdk.services.s3.endpoints.internal.Value;
 
 @DynamoDbBean
 public class Design {
@@ -20,11 +19,14 @@ public class Design {
     private Instant timestamp;
     private Boolean addToMarket;
     private Integer numLikes;
+    private Integer price;
+    private String material;
 
     public Design() {}
 
     public Design(String userId, String designId, String userPrompt, String type, String style,
-                  String imageUrl, String enhancedPrompt, Instant timestamp, Boolean addToMarket, Integer numLikes) {
+                  String imageUrl, String enhancedPrompt, Instant timestamp, Boolean addToMarket, Integer numLikes,
+                  Integer price, String material) {
         this.userId = userId;
         this.designId = designId;
         this.userPrompt = userPrompt;
@@ -35,6 +37,8 @@ public class Design {
         this.timestamp = timestamp;
         this.addToMarket = addToMarket;
         this.numLikes = numLikes;
+        this.price = price;
+        this.material = material;
     }
 
     @DynamoDbPartitionKey
@@ -114,4 +118,12 @@ public class Design {
     public Integer getNumLikes() {
         return numLikes;
     }
+
+    public void setPrice(Integer price) {this.price = price;}
+
+    public Integer getPrice(){return this.price;}
+
+    public void setMaterial(String material) {this.material = material;}
+
+    public  String getMaterial(){return this.material;}
 }

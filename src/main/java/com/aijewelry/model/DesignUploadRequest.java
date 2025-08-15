@@ -7,4 +7,6 @@ public class DesignUploadRequest {
     public String userPrompt;
     public String enhancedPrompt;
     public String imageBase64;
+    public Integer price;
+    public String material;
 }

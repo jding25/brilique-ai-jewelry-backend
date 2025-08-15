@@ -29,6 +29,8 @@ public class DesignServiceImpl implements DesignService {
         design.setImageUrl(imageUrl);
         design.setTimestamp(Instant.now());
         design.setAddToMarket(false);
+        design.setMaterial(request.material);
+        design.setPrice(request.price);
         design.setNumLikes(0);
 
         designDao.saveDesign(design);
