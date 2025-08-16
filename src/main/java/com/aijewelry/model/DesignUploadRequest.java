@@ -10,4 +10,5 @@ public class DesignUploadRequest {
     public Integer price;
     public String material;
     public String description;
+    public Boolean addToMarket;
 }

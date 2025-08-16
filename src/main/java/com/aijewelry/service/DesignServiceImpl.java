@@ -28,7 +28,7 @@ public class DesignServiceImpl implements DesignService {
         design.setEnhancedPrompt(request.enhancedPrompt);
         design.setImageUrl(imageUrl);
         design.setTimestamp(Instant.now());
-        design.setAddToMarket(false);
+        design.setAddToMarket(request.addToMarket != null ? request.addToMarket : false);
         design.setMaterial(request.material);
         design.setPrice(request.price);
         design.setNumLikes(0);
