@@ -11,4 +11,5 @@ public class DesignUploadRequest {
     public String material;
     public String description;
     public Boolean addToMarket;
+    public String designName;
 }
