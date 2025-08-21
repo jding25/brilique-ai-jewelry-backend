@@ -41,8 +41,8 @@ public class User {
 
     public void setLikedDesigns(Set<String> likedDesigns){this.likedDesigns = likedDesigns;}
 
-    public List getOrders(){return this.orders;}
+    public List<String> getOrders(){return this.orders;}
 
-    public void setOrders(List orders){this.orders = orders;}
+    public void setOrders(List<String> orders){this.orders = orders;}
 
 }
