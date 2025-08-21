@@ -15,6 +15,9 @@ public class UserController {
 
     private final UserService service = new UserServiceImpl();
 
+    @GET @Path("/ping") @Produces(MediaType.TEXT_PLAIN)
+    public String ping() { return "pong"; }
+
     @POST
     @Path("/upload")
     @Consumes(MediaType.APPLICATION_JSON)
